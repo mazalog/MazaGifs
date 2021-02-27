@@ -24,4 +24,4 @@ const FormSearch=()=>{
     )
 }
 
-export default FormSearch
+export default React.memo(FormSearch)
