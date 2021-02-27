@@ -6,7 +6,6 @@
   margin: 10px auto;
   padding: 20px 0;
   width: 144px;
-  cursor:pointer;
 }
 
 .App-logo img {
@@ -66,4 +65,22 @@
     width: 40%;
     max-width: 300px;
   }
+}
+
+.btn {
+  border: 1px solid transparent;
+  padding: .5rem 1rem;
+  background-color: var(--brand-color_3);
+  color: var(--theme-body-txt);
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.btn[disabled] {
+  opacity: .3;
+  pointer-events: none;
+}
+
+.btn:hover {
+  background-color: var(--brand-color_6);
 }
