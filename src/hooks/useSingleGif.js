@@ -12,7 +12,6 @@ export default function useSingleGif({id}){
     const [isLoading,setIsLoading]=useState(false)
     const [isError,setIsError]=useState(false)
 
-
    useEffect(function(){
        if(!gif){
         setIsLoading(true)

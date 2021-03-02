@@ -3,7 +3,7 @@ import Gif from '../../components/Gif'
 import useSingleGif from '../../hooks/useSingleGif'
 import Spinner from '../../components/Spinner'
 import {Redirect} from 'wouter'
-import useTitle from '../../hooks/useTtile'
+import {Helmet} from 'react-helmet'
 
 export default function Detail ({ params }) {
 
@@ -11,14 +11,21 @@ export default function Detail ({ params }) {
 
    const title=gif?gif.title:''
 
-   useTitle({title})
 
-   if(isLoading)return <Spinner/>
+   if(isLoading)return<Spinner/>
+     
+     
+
    if(isError)return <Redirect to='404'/>
    if(!gif)return null
 
-  return <>
+  return(    
+      <>
+      <Helmet>
+        <title>{title}</title>
+        <meta name="description" content={'Detail of '+title} />
+      </Helmet>
       <h3 className="App-title">{gif.title}</h3>
       <Gif {...gif} />
-    </>
+    </>)
 }
