@@ -34,7 +34,6 @@ export default function SearchForm ({initialKeyword='',initialRating='g'}) {
     <select value={rating} onChange={handleChangeRating}>
        {RATINGS.map(rating=> <option key={rating}>{rating}</option>)}
     </select>
-    <small>{times}</small>
   </form>
   )
 }
