@@ -4,6 +4,8 @@ import useSingleGif from '../../hooks/useSingleGif'
 import Spinner from '../../components/Spinner'
 import {Redirect} from 'wouter'
 import {Helmet} from 'react-helmet'
+import {Link} from 'wouter'
+import './index.css'
 
 export default function Detail ({ params }) {
 
@@ -27,5 +29,7 @@ export default function Detail ({ params }) {
       </Helmet>
       <h3 className="App-title">{gif.title}</h3>
       <Gif {...gif} />
+      <br/>
+      <Link to="#" className="btn-dow" >Descargar</Link>
     </>)
 }

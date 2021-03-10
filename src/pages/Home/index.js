@@ -6,8 +6,8 @@ import SearchForm from '../../components/SearchForm'
 import {Helmet} from 'react-helmet'
 
 export default function Home() {
+  
   const {gifs} = useGifs()
-
 
   return (
     <>

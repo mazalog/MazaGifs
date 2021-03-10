@@ -1,6 +1,7 @@
 .Gif {
   --gifShadow-size : var(--gridList-gap, 6px);
   margin-bottom: .5em;
+  position: relative;
 }
 
 .Gif-link {
@@ -9,6 +10,13 @@
   text-decoration: none;
   position: relative;
   width: 100%;
+}
+
+.Gif-buttons{
+  position: absolute;
+  top: 8px;
+  right:8px;
+  z-index: 1;
 }
 
 .Gif h4 {

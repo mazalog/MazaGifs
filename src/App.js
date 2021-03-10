@@ -7,6 +7,8 @@ import Detail from './pages/Detail'
 import Header from './components/Header'
 import Login from './pages/Login'
 import Logout from './pages/Logout'
+import Register from './pages/Register';
+
 import './App.css'
 
 
@@ -41,8 +43,8 @@ export default function App() {
               path="/login"
             />
             <Route
-              component={Logout}
-              path="/logout"
+              component={Register}
+              path="/Register"
             />
           </GifsContextProvider>
         </section>

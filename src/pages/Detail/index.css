@@ -1,0 +1,10 @@
+.btn-dow{
+    max-width: 320px;
+    width: 100%;
+    padding: 10px;
+    margin: 10px;
+    color: #fff;
+    font-weight: 600;
+    font-size: 16px;
+    background:  rgba(143, 36, 170, 0.596);
+}

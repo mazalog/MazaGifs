@@ -13,6 +13,7 @@ export function useGifs ({ keyword,rating } = { keyword: null }) {
 
   const keywordToUse = keyword || localStorage.getItem('lastKeyword') || 'random'
 
+
   useEffect(function () {
     setLoading(true)
 

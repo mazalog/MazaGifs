@@ -31,7 +31,7 @@ export default function SearchForm ({initialKeyword='',initialRating='g'}) {
   <form onSubmit={handleSubmit} className={css["c-search"]}>
     <button className={css["c-search-btn"]}>Buscar</button>
     <input className={css["c-search-input"]} placeholder="Busca un gifs..." onChange={handleChange} type='text' value={keyword} />
-    <select value={rating} onChange={handleChangeRating}>
+    <select className={css["c-search-btn"]} value={rating} onChange={handleChangeRating}>
        {RATINGS.map(rating=> <option key={rating}>{rating}</option>)}
     </select>
   </form>

@@ -16,13 +16,19 @@ const Header =()=>{
         <header className="gf-header">
             {
             isLogged?
-            <Link to='#' onClick={handleClick}>
-                Logout
+            <Link className="header-btn" to='#' onClick={handleClick}>
+                Cerrar sesion 
             </Link>
             :
-            <Link to="/login">
-                Login
+            <>
+            <Link  className="header-btn" to="/Register">
+                Registro
             </Link>
+            <Link className="header-btn" to="/login">
+                Iniciar sesion
+            </Link>
+            </>
+
             }
         </header>
     )
