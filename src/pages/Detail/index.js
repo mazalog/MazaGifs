@@ -30,6 +30,5 @@ export default function Detail ({ params }) {
       <h3 className="App-title">{gif.title}</h3>
       <Gif {...gif} />
       <br/>
-      <Link to="#" className="btn-dow" >Descargar</Link>
     </>)
 }

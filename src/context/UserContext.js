@@ -15,7 +15,7 @@ export function UserContextProvider ({children}) {
       )
     
     const getFav=useCallback(()=>{
-      db.collection(jwt).onSnapshot( (querySnapshot)=>{
+      db.collection(window.sessionStorage.getItem('jwt')).onSnapshot( (querySnapshot)=>{
           const listFavs=[]   
           querySnapshot.forEach((fav)=>{
               listFavs.push({...fav.data(),id:fav.id})

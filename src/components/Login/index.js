@@ -1,47 +1,73 @@
-import React, { useEffect, useState } from 'react'
-import {useLocation} from 'wouter'
-import useUser from '../../hooks/useUser'
-import './login.css'
-
-
+import React, { useEffect, useState } from "react";
+import { useLocation } from "wouter";
+import useUser from "../../hooks/useUser";
+import "./login.css";
 
 const Login = () => {
+  const [, navigate] = useLocation();
+  const [username, setUsername] = useState({ username: "", password: "" });
+  const { isLogged, login, isLoginLoading } = useUser();
 
-    const [,navigate]=useLocation()
-    const [username,setUsername]=useState({username:'',password:''})
-    const {isLogged,login}=useUser()
+  useEffect(() => {
+    if (isLogged === true) navigate("/");
+  }, [isLogged]);
 
+  const handleChange = (event) => {
+    setUsername({
+      ...username,
+      [event.target.name]: event.target.value,
+    });
+  };
 
-    useEffect(()=>{
-        if(isLogged===true) navigate('/')
-        },[isLogged,navigate])
+  const onSubmit = (event) => {
+    event.preventDefault();
+    login({ username });
+  };
 
-    const handleChange=(event)=>{
-        setUsername({
-            ...username,[event.target.name]:event.target.value
-        })
-    }
+  return (
+    <>
+      {isLoginLoading ? (
+        <h5>Chequeando credencial....</h5>
+      ) : (
+        <>
+          {
+           isLogged?(
+           <h4>Inicio Exitoso</h4>
+           ):(
+               <>
+            <form className="form" onSubmit={onSubmit}>
+              <label>
+                Usuario
+                <input
+                  value={username.username}
+                  onChange={handleChange}
+                  name="username"
+                  placeholder="usuario"
+                  required
+                />
+              </label>
+              <label>
+                Contraseña
+                <input
+                  value={username.password}
+                  onChange={handleChange}
+                  name="password"
+                  type="password"
+                  placeholder="contraseña"
+                  required
+                />
+              </label>
+              <button type="submit" className="btn">
+                Iniciar
+              </button>
+            </form>
+               </>
+           )
+          }
+        </>
+      )}
+    </>
+  );
+};
 
-    
-    const onSubmit=(event)=>{
-    event.preventDefault()
-    login({username})
-    }
-
-
-    return (
-         <form className="form" onSubmit={onSubmit}>
-             <label>
-                 usuario
-                 <input value={username.username} onChange={handleChange}  name="username" placeholder="usuario" required/>
-             </label>
-             <label>
-                 contraseña
-                 <input value={username.password} onChange={handleChange} name="password" type="password" placeholder="contraseña" required />
-             </label>
-             <button type="submit" className="btn">Iniciar</button>
-         </form>
-    )
-}
-
-export default Login
+export default Login;

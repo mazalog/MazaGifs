@@ -1,11 +1,55 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import {useLocation} from 'wouter'
 import useUser from '../../hooks/useUser'
+import {useForm} from 'react-hook-form'
 import './index.css'
 
 
-const Register = () => {
+export default function Register () {
 
+    const {register,errors,handleSubmit}=useForm()
+    
+    const [,navigate]=useLocation()
+    const {isLogged,registerUser}=useUser()
+
+    useEffect(()=>{
+        if(isLogged===true) navigate('/')
+        },[isLogged,navigate])
+
+    const onSubmit=values=>{
+       let  username=values 
+       registerUser({username})
+    }
+
+    return( 
+        <>
+        <form className="form" onSubmit={handleSubmit(onSubmit)}>
+        <label>
+                Usuario
+            <input
+            name="username" 
+            placeholder="usuario"
+            ref={register({required:true})}
+             />
+        </label>
+
+             {errors.username &&<small>Campo Requerido</small>}
+        <label>
+              Contraseña
+            <input 
+             name="password"
+             type="password" 
+             placeholder="contraseña" 
+             ref={register({required:true})}
+              />
+        </label>
+             {errors.username &&<small>Campo Requerido</small>}
+            <button type="submit" className="btn">Registrar</button>
+        </form>
+        </>
+    )
+}
+/*
     const [,navigate]=useLocation()
     const [username,setUsername]=useState({username:'',password:''})
     const {isLogged,register}=useUser()
@@ -38,6 +82,4 @@ const Register = () => {
         <button type="submit" className="btn">Registrar</button>
     </form>
     )
-}
-
-export default Register
+*/

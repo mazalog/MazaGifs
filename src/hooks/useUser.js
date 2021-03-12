@@ -1,4 +1,4 @@
-import {useContext,useCallback,useState,useEffect} from 'react'
+import {useContext,useCallback,useState} from 'react'
 import Context from '../context/UserContext'
 import 'firebase/auth'
 import 'firebase/firestore'
@@ -16,20 +16,20 @@ export default function useUser() {
     const firebase=useFirebaseApp()
     const db=useFirestore()
 
-    const register=useCallback(({username})=>{
+    const registerUser=useCallback(({username})=>{
         setState({loading:true,error:false})
         firebase.auth().createUserWithEmailAndPassword(username.username,username.password)
         .then(jwt=>{
+            setJWT(jwt)
             window.sessionStorage.setItem('jwt',jwt)
             setState({loading:false,error:false})
-            setJWT(jwt)
         })
         .catch(err=>{
             window.sessionStorage.removeItem('jwt')
             setState({loading:false,error:true})
             console.error(err)
         })
-    },[setJWT])
+    },[])
 
 
     const login=useCallback(({username})=>{
@@ -44,7 +44,7 @@ export default function useUser() {
            setState({loading:false,error:true})
            console.error(err)
        })
-    },[setJWT])
+    },[])
 
  
     const logout=useCallback(()=>{
@@ -71,15 +71,21 @@ export default function useUser() {
             querySnapshot.forEach((fav)=>{
                 listFavs.push({...fav.data(),id:fav.id})
             })
+
             const faved=listFavs.find(singleFav=>singleFav.fav===id)
-            const doc=faved.id
-            db.collection(jwt).doc(doc).delete()
-            .then(function(){
-            console.log('Delete')
-            })
-            .catch(err=>{
-                console.error(err)
-            })})
+            
+            if(faved){
+                const doc=faved.id
+                db.collection(jwt).doc(doc).delete()
+                .then(function(){
+                console.log('Delete')
+                })
+                .catch(err=>{
+                    console.error(err)
+                })
+            }
+
+        })
 
     },[])
 
@@ -89,7 +95,7 @@ export default function useUser() {
         isLogged:Boolean(jwt),
         isLoginLoading:state.loading,
         isLoginError:state.error,
-        register,
+        registerUser,
         login,
         logout,
         favs,
